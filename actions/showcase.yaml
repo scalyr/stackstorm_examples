@@ -1,0 +1,17 @@
+---
+name: showcase
+pack: scalyr_examples
+description: A demo worklfow to showcase StackStorm power in integrating Scalyr various tools.
+runner_type: orquesta
+entry_point: workflows/showcase.yaml
+enabled: true
+parameters:
+  query:
+    required: true
+    type: string
+  link:
+    required: false
+    type: string
+  alert:
+    type: object
+    required: false

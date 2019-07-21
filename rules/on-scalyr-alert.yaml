@@ -1,0 +1,18 @@
+---
+    name: "sample_rule_with_webhook"
+    pack: "scalyr_examples"
+    description: "Firing showcase automation on Scalyr alert."
+    enabled: true
+
+    trigger:
+        type: "core.st2.webhook"
+        parameters:
+            url: "scalyr"
+
+    # criteria:
+    # TODO: add criteria
+
+    action:
+        ref: scalyr_examples.showcase
+        parameters:
+            query: ""

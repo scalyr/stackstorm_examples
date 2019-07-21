@@ -1,0 +1,11 @@
+---
+name: scalyr_examples
+description: Scalyr automation samples
+keywords:
+  - monitoring
+  - observability
+  - logs
+  - examples
+version : 0.0.1
+author : Scalyr, Inc.
+email : info@stackstorm.com

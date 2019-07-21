@@ -1,0 +1,38 @@
+#
+
+version: 1.0
+
+description: |
+  A demo worklfow to showcase StackStorm power in integrating various tools
+  Runs on Scalyr alert, gets relevant logs, creates a Zendesk ticket, and passes it along
+  with OpsGenie incident.
+
+input:
+  - query
+  - alert
+  - link
+
+tasks:
+  get_relevant_logs:
+    action: scalyr.query filter=<% ctx(query) %>
+    next:
+      - when: <% succeeded() %>
+        do: create_ticket
+
+  create_ticket:
+    action: zendesk.create_ticket
+    input:
+      subject: "test"
+      description: "Alert, alert, check out <% ctx(link) %>"
+    next:
+      - when: <% succeeded() %>
+        do: wake_me_up
+
+  wake_me_up:
+    action: opsgenie.create_alert
+    input:
+      message: "test"
+      note: <% str(task(get_relevant_logs).result.result.matches.attributes.select([$metric, $value])) %>
+
+
+
